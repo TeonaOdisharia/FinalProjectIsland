@@ -2,42 +2,46 @@ package com.javarush.generators;
 
 import com.javarush.entity.islandModel.IslandMap;
 import com.javarush.entity.islandModel.Location;
+import com.javarush.entity.organisms.BasalOrganism;
+import com.javarush.settings.Settings;
+import lombok.Getter;
 
+import java.util.List;
+
+@Getter
 public class IslandGenerator {
     private final IslandMap islandMap;
 
     public IslandGenerator(int x, int y) {
         this.islandMap = new IslandMap(x, y);
+        generateLocation();
         initLocation();
     }
 
     public void initLocation() {
         Location[][] locations = islandMap.getLocations();
-        for (int y = 0; y < locations[y].length; y++) {
-            for (int x = 0; x < locations.length; x++) {
-                locations[x][y] = new Location(y, x);
-            }
+        for (int i = 0; i < locations.length * locations[0].length; i++) {
+            locations[i / locations[0].length][i % locations[0].length].start();
         }
     }
 
-    public void generateNewWorld(){
+    public void generateLocation() {
         Location[][] locations = islandMap.getLocations();
         for (int y = 0; y < locations[y].length; y++) {
             for (int x = 0; x < locations.length; x++) {
-                generateNearbyLocations();
-                initOrganismsSet();
-                generateOrganisms();
+                Location location = locations[x][y];
+//                generateNearbyLocations(location);
+                generateOrganisms(location);
             }
+        }
+        for (int i = 0; i < locations.length * locations[0].length; i++) {
+            Location location = locations[i / locations[0].length][i % locations[0].length];
+            generateOrganisms(location);
         }
     }
 
-    private void generateNearbyLocations() {
-    }
-
-    private void initOrganismsSet() {
-    }
-
-    private void generateOrganisms() {
-        
+    private void generateOrganisms(Location location) {
+        List<BasalOrganism> basalOrganisms = Settings.generateObjectsByParameters();
+        location.setAnimals(basalOrganisms);
     }
 }

@@ -1,6 +1,7 @@
 package com.javarush.entity.organisms;
 
 import com.javarush.entity.islandModel.Location;
+import com.javarush.helper.YamlOrganism;
 import com.javarush.service.OrganismsBehaviors;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class BasalOrganism implements OrganismsBehaviors {
     private double weight;
     private int maxCountOnCell;
     private int speed;
+    private int satiation;
 
     protected Class<? extends BasalOrganism> aClass;
     private final Lock lock = new ReentrantLock(true);
@@ -36,5 +38,15 @@ public class BasalOrganism implements OrganismsBehaviors {
 
     public BasalOrganism(BasalOrganism animal, Location location) {
 
+    }
+
+    public BasalOrganism(YamlOrganism yamlOrganism) {
+        this.name = yamlOrganism.getName();
+        this.icon = yamlOrganism.getIcon();
+        this.weight = yamlOrganism.getWeight();
+        this.maxCountOnCell = yamlOrganism.getMax_num();
+        this.speed = yamlOrganism.getMovement_speed();
+        this.satiation = yamlOrganism.getMovement_speed();
+        this.monitor = this;
     }
 }
