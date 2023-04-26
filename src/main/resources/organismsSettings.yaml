@@ -75,7 +75,7 @@
   max_num: 10
   movement_speed: 3
   satiation: 100
-  icon: 🦬
+  icon: 🐃
 - name: Duck
   weight: 1
   max_num: 200
@@ -106,9 +106,6 @@
   weight: 100
   max_num: 50
   icon: 🌴
-- name: Grass
-  weight: 0.1
-  max_num: 10000
 - name: Grass
   weight: 0.1
   max_num: 10000

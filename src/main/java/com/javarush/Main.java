@@ -17,6 +17,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         IslandGenerator island = new IslandGenerator(Settings.Y_POSITION, Settings.X_POSITION);
+//        island.getIslandMap().showIsland();
         IslandTask islandTask = new IslandTask(island);
         islandTask.start();
     }

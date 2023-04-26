@@ -15,16 +15,16 @@ public class textReader {
         }
     }
     public static String[] readLines(String fileName) {
-        List<String> names = new ArrayList<>();
+        List<String> lines = new ArrayList<>();
         InputStream inputStream = textReader.class.getClassLoader().getResourceAsStream(fileName);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                names.add(line);
+                lines.add(line);
             }
         } catch (IOException e) {
             throw new RuntimeException("Error reading names from the file", e);
         }
-        return names.toArray(new String[0]);
+        return lines.toArray(new String[0]);
     }
 }

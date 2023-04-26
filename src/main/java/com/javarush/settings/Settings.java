@@ -1,8 +1,10 @@
 package com.javarush.settings;
 
 import com.javarush.entity.organisms.BasalOrganism;
+import com.javarush.entity.organisms.animals.predators.Predator;
 import com.javarush.exceptions.IslandException;
 import com.javarush.helper.ClassFinder;
+import com.javarush.helper.Randomizer;
 import com.javarush.helper.YamlOrganism;
 import com.javarush.utils.YamlReader;
 import org.reflections.Reflections;
@@ -15,15 +17,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public class Settings {
-    public static final double MAX_AMOUNT_OF_PLANT_ON_ONE_CELL = 200;
-    public static final double GROWTH_OF_PLANT = 20;
-    public static final int Y_POSITION = 2;
-    public static final int X_POSITION= 5;
+    public static final int Y_POSITION = 3;
+    public static final int X_POSITION = 3;
     public static final int DURATION = 200;
     public static final int NUMBER_OF_SIMULATION = 30;
     private static final String SETTINGS_FILE = "organismsSettings.yaml";
 
-    public static final Map<Class<? extends BasalOrganism>, double[]> BASIC_PARAMETERS_OF_ORGANISMS = new HashMap<>();
 
     public static List<BasalOrganism> generateObjectsByParameters() {
         List<BasalOrganism> createdObjects = new ArrayList<>();
@@ -35,15 +34,23 @@ public class Settings {
         Map<String, Class<?>> classesByName = ClassFinder.findClassByName(classNames);
 
         for (YamlOrganism yamlOrganism : organisms) {
+            int toBeOrNotToBe = Randomizer.getNumber(0, 2);
+            if (toBeOrNotToBe == 0) {
+                continue;
+            }
+
             try {
                 Class<?> classByName = classesByName.get(yamlOrganism.getName());
-                if (classByName ==null) {
-                    System.out.println(yamlOrganism);
+                if (classByName == null) {
                     continue;
                 }
+
                 Constructor<?> constructor = classByName.getConstructor(YamlOrganism.class);
-                BasalOrganism instance = (BasalOrganism) constructor.newInstance(yamlOrganism);
-                createdObjects.add(instance);
+                int counter = Randomizer.getNumber(0, yamlOrganism.getMax_num());
+                for (int i = 0; i < counter; i++) {
+                    BasalOrganism instance = (BasalOrganism) constructor.newInstance(yamlOrganism);
+                    createdObjects.add(instance);
+                }
             } catch (InvocationTargetException e) {
                 throw new RuntimeException(e);
             } catch (NoSuchMethodException e) {

@@ -13,12 +13,9 @@ import java.util.Map;
 @Setter
 @ToString
 public class Wolf extends Predator {
-
-    public Wolf(Object monitor, String name, String icon, double weight, int maxCountOnCell, int speed, int energy, double foodForLife, Map<String, Integer> eatingMap) {
-        super(monitor, name, icon, weight, maxCountOnCell, speed, energy, foodForLife, eatingMap);
-    }
-
     public Wolf(YamlOrganism yamlOrganism) {
+
         super(yamlOrganism);
+
     }
 }

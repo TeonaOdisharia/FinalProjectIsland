@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -23,6 +26,7 @@ public class BasalOrganism implements OrganismsBehaviors {
     private int maxCountOnCell;
     private int speed;
     private int satiation;
+    private Map<String, Integer> mealList;
 
     protected Class<? extends BasalOrganism> aClass;
     private final Lock lock = new ReentrantLock(true);
@@ -50,5 +54,18 @@ public class BasalOrganism implements OrganismsBehaviors {
         this.speed = yamlOrganism.getMovement_speed();
         this.satiation = yamlOrganism.getMovement_speed();
         this.monitor = this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BasalOrganism that = (BasalOrganism) o;
+        return name.equals(that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

@@ -18,11 +18,8 @@ public abstract class Animal extends BasalOrganism {
     private double foodForLife;
     private Map<String, Integer> eatingMap;
 
-    public Animal(Object monitor, String name, String icon, double weight, int maxCountOnCell, int speed, int energy, double foodForLife, Map<String, Integer> eatingMap) {
+    public Animal(Object monitor, String name, String icon, double weight, int maxCountOnCell, int speed) {
         super(monitor, name, icon, weight, maxCountOnCell, speed);
-        this.energy = energy;
-        this.foodForLife = foodForLife;
-        this.eatingMap = eatingMap;
     }
 
     public Animal(YamlOrganism yamlOrganism) {

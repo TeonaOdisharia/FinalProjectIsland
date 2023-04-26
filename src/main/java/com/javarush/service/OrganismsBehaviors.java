@@ -16,4 +16,6 @@ public interface OrganismsBehaviors {
     default void die(){
 
     }
+
+
 }
