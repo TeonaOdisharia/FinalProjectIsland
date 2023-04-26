@@ -4,12 +4,13 @@ import com.javarush.helper.YamlOrganism;
 
 import java.util.Map;
 
-public class Frog extends Herbivore{
-    public Frog(Object monitor, String name, String icon, double weight, int maxCountOnCell, int speed, int energy, double foodForLife, Map<String, Integer> eatingMap) {
+public class Sheep extends Herbivore {
+
+    public Sheep(Object monitor, String name, String icon, double weight, int maxCountOnCell, int speed, int energy, double foodForLife, Map<String, Integer> eatingMap) {
         super(monitor, name, icon, weight, maxCountOnCell, speed, energy, foodForLife, eatingMap);
     }
 
-    public Frog(YamlOrganism yamlOrganism) {
+    public Sheep(YamlOrganism yamlOrganism) {
         super(yamlOrganism);
     }
 }

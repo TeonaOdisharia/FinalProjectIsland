@@ -27,6 +27,8 @@ public class BasalOrganism implements OrganismsBehaviors {
     protected Class<? extends BasalOrganism> aClass;
     private final Lock lock = new ReentrantLock(true);
 
+    private int yamlOrganism;
+
     public BasalOrganism(Object monitor, String name, String icon, double weight, int maxCountOnCell, int speed) {
         this.monitor = monitor;
         this.name = name;

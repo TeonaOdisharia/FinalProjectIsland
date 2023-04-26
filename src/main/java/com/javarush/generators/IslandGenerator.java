@@ -27,13 +27,6 @@ public class IslandGenerator {
 
     public void generateLocation() {
         Location[][] locations = islandMap.getLocations();
-        for (int y = 0; y < locations[y].length; y++) {
-            for (int x = 0; x < locations.length; x++) {
-                Location location = locations[x][y];
-//                generateNearbyLocations(location);
-                generateOrganisms(location);
-            }
-        }
         for (int i = 0; i < locations.length * locations[0].length; i++) {
             Location location = locations[i / locations[0].length][i % locations[0].length];
             generateOrganisms(location);

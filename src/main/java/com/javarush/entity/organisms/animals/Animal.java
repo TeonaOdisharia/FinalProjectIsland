@@ -1,6 +1,7 @@
 package com.javarush.entity.organisms.animals;
 
 import com.javarush.entity.organisms.BasalOrganism;
+import com.javarush.helper.YamlOrganism;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,5 +23,9 @@ public abstract class Animal extends BasalOrganism {
         this.energy = energy;
         this.foodForLife = foodForLife;
         this.eatingMap = eatingMap;
+    }
+
+    public Animal(YamlOrganism yamlOrganism) {
+        super(yamlOrganism);
     }
 }

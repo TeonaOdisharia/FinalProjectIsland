@@ -1,51 +1,42 @@
 package com.javarush.helper;
 
 import org.reflections.Reflections;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class ClassFinder {
-    public static Class<?> findClassByName(String className) throws ClassNotFoundException {
-        Reflections reflections = new Reflections("");
-        Set<Class<?>> classes = reflections.getTypesAnnotatedWith((Class<? extends Annotation>) Class.forName(className));
 
-        if (classes.isEmpty()) {
-            throw new ClassNotFoundException("Class not found: " + className);
-        }
+    public static Map<String, Class<?>> findClassByName(List<String> classNames) {
+        Map<String, Class<?>> classesByName = new HashMap<>();
 
-        return classes.iterator().next();
-    }
+        List<String> packageNames = new ArrayList<>();
+        packageNames.add("com.javarush.entity.organisms.animals.predators");
+        packageNames.add("com.javarush.entity.organisms.plants");
+        packageNames.add("com.javarush.entity.organisms.animals.omnivores");
+        packageNames.add("com.javarush.entity.organisms.animals.herbivores");
 
-    public static HashMap<String, String> getClasses(String rootPackage) throws IOException {
-        HashMap<String, String> classes = new HashMap<>();
+        for (String packageName : packageNames) {
+            Reflections reflections = new Reflections(new ConfigurationBuilder()
+                    .setUrls(ClasspathHelper.forPackage(packageName))
+                    .setScanners(new SubTypesScanner(false)));
 
-        File rootDir = new File(rootPackage);
+            Set<Class<?>> classes = reflections.getSubTypesOf(Object.class);
 
-        if (!rootDir.exists()) {
-            throw new IOException("The root directory " + rootPackage + " does not exist.");
-        }
-
-        Scanner scanner = new Scanner(rootDir);
-
-        while (scanner.hasNext()) {
-            String filename = scanner.next();
-
-            if (filename.endsWith(".class")) {
-                String fullPath = rootPackage + "/" + filename;
-
-                String className = filename.substring(0, filename.lastIndexOf('.'));
-
-                classes.put(className, fullPath);
+            for (String className : classNames) {
+                for (Class<?> clazz : classes) {
+                    if (clazz.getSimpleName().equals(className)) {
+//                        System.out.println("Class found: " + clazz.getName());
+                        classesByName.put(className, clazz);
+                    }
+                }
             }
         }
-
-        scanner.close();
-
-        return classes;
+        return classesByName;
     }
 }

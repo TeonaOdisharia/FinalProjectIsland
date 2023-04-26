@@ -28,14 +28,22 @@ public class Settings {
     public static List<BasalOrganism> generateObjectsByParameters() {
         List<BasalOrganism> createdObjects = new ArrayList<>();
         List<YamlOrganism> organisms = YamlReader.readYamlFile(SETTINGS_FILE);
+        List<String> classNames = new ArrayList<>();
+        for (YamlOrganism organism : organisms) {
+            classNames.add(organism.getName());
+        }
+        Map<String, Class<?>> classesByName = ClassFinder.findClassByName(classNames);
+
         for (YamlOrganism yamlOrganism : organisms) {
             try {
-                Class<?> classByName = ClassFinder.findClassByName(yamlOrganism.getName());
+                Class<?> classByName = classesByName.get(yamlOrganism.getName());
+                if (classByName ==null) {
+                    System.out.println(yamlOrganism);
+                    continue;
+                }
                 Constructor<?> constructor = classByName.getConstructor(YamlOrganism.class);
                 BasalOrganism instance = (BasalOrganism) constructor.newInstance(yamlOrganism);
                 createdObjects.add(instance);
-            } catch (ClassNotFoundException e) {
-                throw new IslandException(e);
             } catch (InvocationTargetException e) {
                 throw new RuntimeException(e);
             } catch (NoSuchMethodException e) {
