@@ -1,18 +1,18 @@
 - name: Wolf
   weight: 50
-  max_num: 30
+  max_num: 3
   movement_speed: 3
   satiation: 8
   icon: 🐺
 - name: Boa
   weight: 15
-  max_num: 30
+  max_num: 3
   movement_speed: 1
   satiation: 3
   icon: 🐍
 - name: Fox
   weight: 8
-  max_num: 30
+  max_num: 3
   movement_speed: 2
   satiation: 2
   icon: 🦊
@@ -24,93 +24,96 @@
   icon: 🐻
 - name: Eagle
   weight: 6
-  max_num: 20
+  max_num: 2
   movement_speed: 3
   satiation: 1
   icon: 🦅
 - name: Horse
   weight: 400
-  max_num: 20
+  max_num: 2
   movement_speed: 4
   satiation: 60
   icon: 🐴
 - name: Deer
   weight: 300
-  max_num: 20
+  max_num: 2
   movement_speed: 4
   satiation: 50
   icon: 🦌
 - name: Rabbit
   weight: 2
-  max_num: 150
+  max_num: 15
   movement_speed: 2
   satiation: 0.45
   icon: 🐇
 - name: Mouse
   weight: 0.05
-  max_num: 500
+  max_num: 5
   movement_speed: 1
   satiation: 0.01
   icon: 🐁
 - name: Goat
   weight: 60
-  max_num: 140
+  max_num: 14
   movement_speed: 3
-  satiation: 10
+  satiation: 1
   icon: 🐐
 - name: Sheep
   weight: 70
-  max_num: 140
+  max_num: 14
   movement_speed: 3
   satiation: 15
   icon: 🐑
 - name: Boar
   weight: 400
-  max_num: 50
+  max_num: 5
   movement_speed: 2
   satiation: 50
   icon: 🐗
 - name: Buffalo
   weight: 700
-  max_num: 10
+  max_num: 1
   movement_speed: 3
   satiation: 100
-  icon: 🐃
+  icon: 🦬
 - name: Duck
   weight: 1
-  max_num: 200
+  max_num: 2
   movement_speed: 4
   satiation: 0.15
   icon: 🦆
 - name: Caterpillar
   weight: 0.01
-  max_num: 1000
+  max_num: 1
   movement_speed: 0
   satiation: 0
   icon: 🐛
 - name: Frog
   weight: 0.5
-  max_num: 200
+  max_num: 2
   movement_speed: 1
   satiation: 0.05
   icon: 🐸
 - name: Banana
   weight: 0.2
-  max_num: 1000
+  max_num: 10
   icon: 🍌
 - name: Coconut
   weight: 1.5
-  max_num: 500
+  max_num: 5
   icon: 🥥
 - name: Palm
   weight: 100
-  max_num: 50
+  max_num: 5
   icon: 🌴
 - name: Grass
   weight: 0.1
-  max_num: 10000
+  max_num: 10
+- name: Grass
+  weight: 0.1
+  max_num: 10
   icon: 🌿
 - name: Pitcher
   weight: 0.02
-  max_num: 1000
+  max_num: 10
   icon: 🥀

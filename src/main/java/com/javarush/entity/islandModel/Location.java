@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
-@ToString
 public class Location {
     int numProcessors = Runtime.getRuntime().availableProcessors();
     ExecutorService threadPool = Executors.newFixedThreadPool(numProcessors);
