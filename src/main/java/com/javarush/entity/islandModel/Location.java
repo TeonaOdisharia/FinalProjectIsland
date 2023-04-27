@@ -36,13 +36,13 @@ public class Location {
     }
 
     public void start() {
-        lock.lock();
+//        lock.lock();
         try {
             for (BasalOrganism organism : animals) {
                 threadPool.submit(new OrganismTask(organism, this));
             }
         } finally {
-            lock.unlock();
+//            lock.unlock();
         }
     }
 

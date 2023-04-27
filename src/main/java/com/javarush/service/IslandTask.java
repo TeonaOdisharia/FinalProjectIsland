@@ -43,16 +43,17 @@ public class IslandTask {
     };
 
     public void start() {
-        service.scheduleAtFixedRate(islandLifeTask, 1, stepDuration, TimeUnit.MILLISECONDS);
+        service.scheduleAtFixedRate(islandLifeTask, 1, 1, TimeUnit.MILLISECONDS);
     }
 
     private void startingTheSimulation( Location[][] locations) {
         simulationStepNumber.incrementAndGet();
-        island.getIslandMap().showStatisticsOfIsland(simulationStepNumber.get());
+        System.out.println(simulationStepNumber.get());
         for (int i = 0; i < locations.length * locations[0].length; i++) {
             Location location = locations[i / locations[0].length][i % locations[0].length];
             location.start(); //start
         }
+        island.getIslandMap().showStatisticsOfIsland(simulationStepNumber.get());
     }
 
     public IslandTask(IslandGenerator island) {

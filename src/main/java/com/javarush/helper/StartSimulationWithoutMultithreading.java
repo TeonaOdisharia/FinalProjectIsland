@@ -12,35 +12,6 @@ import java.util.List;
 
 public class StartSimulationWithoutMultithreading {
 
-//    public static void startSimulation(IslandMap island){
-//        Location[][] locations = island.getLocations();
-//        for (int i = 0; i < Settings.X_POSITION; i++) {
-//            for (int j = 0; j < Settings.Y_POSITION; j++) {
-//                Location location = locations[i][j];
-//                List<BasalOrganism> animals = location.getAnimals();
-//                try {
-//                    for (BasalOrganism organism : animals) {
-//                        if (organism instanceof Pitcher) {
-//                            organism.eat(location);
-//                            organism.reproduction(location);
-//                            organism.die(location);
-//                        } else if (organism instanceof Plant) {
-//                            organism.reproduction(location);
-//                            organism.die(location);
-//                        } else {
-//                            organism.eat(location);
-//                            organism.move(location);
-//                            organism.reproduction(location);
-//                            organism.die(location);
-//                        }
-//                    }
-//                } catch (Exception e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//        }
-//    }
-
     public static void startSimulation(IslandMap island) {
         Location[][] locations = island.getLocations();
         for (int i = 0; i < Settings.X_POSITION; i++) {
@@ -83,5 +54,4 @@ public class StartSimulationWithoutMultithreading {
             }
         }
     }
-
 }
