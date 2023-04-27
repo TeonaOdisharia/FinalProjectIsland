@@ -17,9 +17,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public class Settings {
-    public static final int Y_POSITION = 3;
-    public static final int X_POSITION = 3;
-    public static final int DURATION = 200;
+    public static final int X_POSITION = 2;
+    public static final int Y_POSITION = 2;
+    public static final int DURATION = 20;
     public static final int NUMBER_OF_SIMULATION = 30;
     private static final String SETTINGS_FILE = "organismsSettings.yaml";
 

@@ -18,7 +18,8 @@ import java.util.concurrent.locks.ReentrantLock;
 @Setter
 @NoArgsConstructor
 @ToString
-public class BasalOrganism implements OrganismsBehaviors {
+
+public class BasalOrganism implements OrganismsBehaviors, Cloneable {
     Object monitor;
     private String name;
     private String icon;
@@ -67,5 +68,15 @@ public class BasalOrganism implements OrganismsBehaviors {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+
+    @Override
+    public BasalOrganism clone() {
+        try {
+            return (BasalOrganism) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError("Cloning failed for BasalOrganism", e);
+        }
     }
 }

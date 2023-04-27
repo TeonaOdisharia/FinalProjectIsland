@@ -11,8 +11,9 @@ import java.util.stream.Collectors;
 
 public class Formatter {
 
-    public static void showStatisticsOfIsland(IslandMap islandMap) {
+    public static void showStatisticsOfIsland(IslandMap islandMap, int simulationStepNumber) {
 
+        System.out.println(String.format("\uD83D\uDDD3\uFE0F day: %d", simulationStepNumber));
         System.out.println("It's a new dawn it's a new day it's a new life! \uD83C\uDFDD\uFE0F\uD83C\uDF1E\uD83C\uDF31 ");
         Location[][] locations = islandMap.getLocations();
         for (int i = 0; i < Settings.X_POSITION; i++) {

@@ -21,17 +21,17 @@ public class OrganismTask implements Runnable {
 
         try {
             if (organism instanceof Pitcher pitcher) {
-                organism.eat();
-                organism.reproduction();
-                organism.die();
+                organism.eat(location);
+                organism.reproduction(location);
+                organism.die(location);
             } else if (organism instanceof Plant plant) {
-                organism.reproduction();
-                organism.die();
+                organism.reproduction(location);
+                organism.die(location);
             } else {
-                organism.eat();
-                organism.move();
-                organism.reproduction();
-                organism.die();
+                organism.eat(location);
+                organism.move(location);
+                organism.reproduction(location);
+                organism.die(location);
             }
         } catch (Exception e) {
             throw new IslandException(e);

@@ -1,5 +1,6 @@
 package com.javarush;
 
+import com.javarush.entity.islandModel.Location;
 import com.javarush.entity.organisms.BasalOrganism;
 import com.javarush.generators.IslandGenerator;
 import com.javarush.helper.YamlOrganism;
@@ -12,12 +13,13 @@ import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class Main {
     public static void main(String[] args) {
-        IslandGenerator island = new IslandGenerator(Settings.Y_POSITION, Settings.X_POSITION);
-//        island.getIslandMap().showIsland();
+        IslandGenerator island = new IslandGenerator(Settings.X_POSITION, Settings.Y_POSITION);
+//        island.getIslandMap().showStatisticsOfIsland(2);
         IslandTask islandTask = new IslandTask(island);
         islandTask.start();
     }

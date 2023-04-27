@@ -13,8 +13,12 @@ public class IslandMap {
         return locations;
     }
 
-    public void showIsland() {
-        Formatter.showStatisticsOfIsland(this);
+    public void showStatisticsOfIsland(int simulationStepNumber) {
+        Formatter.showStatisticsOfIsland(this, simulationStepNumber);
 
+    }
+
+    public Location getLocation(int i, int j) {
+        return locations[i][j];
     }
 }

@@ -3,16 +3,11 @@ package com.javarush.generators;
 import com.javarush.entity.islandModel.IslandMap;
 import com.javarush.entity.islandModel.Location;
 import com.javarush.entity.organisms.BasalOrganism;
-import com.javarush.helper.ClassFinder;
 import com.javarush.settings.Settings;
 import com.javarush.utils.CSVReader;
 import lombok.Getter;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static com.javarush.utils.textReader.readLines;
 
 @Getter
 public class IslandGenerator {
@@ -21,8 +16,8 @@ public class IslandGenerator {
     public IslandGenerator(int x, int y) {
         this.islandMap = new IslandMap(x, y);
         generateLocation();
-        initLocation();
     }
+
 
     public void initLocation() {
         Location[][] locations = islandMap.getLocations();
@@ -38,13 +33,21 @@ public class IslandGenerator {
                 Location location = new Location(i, j);
                 locations[i][j] = location;
                 generateOrganisms(location);
+                initNearbyLocations(location);
             }
         }
-//        for (int i = 0; i < locations.length * locations[0].length; i++) {
-//            Location location = locations[i / locations[0].length][i % locations[0].length];
-//
-//            generateOrganisms(location);
-//        }
+    }
+    private void initNearbyLocations(Location location) {
+        int yLeft = Math.max(location.getYPosition() - 1, 0);
+        int xDown = Math.min(location.getXPosition() + 1, Settings.X_POSITION - 1);
+        int yRight = Math.min(location.getYPosition() + 1, Settings.Y_POSITION - 1);
+        int xUp = Math.max(location.getXPosition() - 1, 0);
+
+        for (int i = xUp; i < xDown ; i++) {
+            for (int j = yLeft; j < yRight; j++) {
+                location.getNearbyLocations().add(islandMap.getLocation(i,j));
+            }
+        }
     }
 
     private void generateOrganisms(Location location) {

@@ -3,15 +3,13 @@ package com.javarush.entity.islandModel;
 import com.javarush.entity.organisms.BasalOrganism;
 import com.javarush.entity.organisms.animals.Animal;
 import com.javarush.service.OrganismTask;
+import com.javarush.service.OrganismsBehaviors;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -22,6 +20,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
+@ToString
 public class Location {
     int numProcessors = Runtime.getRuntime().availableProcessors();
     ExecutorService threadPool = Executors.newFixedThreadPool(numProcessors);
@@ -56,13 +55,40 @@ public class Location {
         threadPool.shutdown();
     }
 
-    @Override
-    public String toString() {
 
+    public boolean isEnoughSpace(BasalOrganism organism) {
+        Map<BasalOrganism, Long> objectCounts = animals.stream()
+                .collect(Collectors.groupingBy(animal -> animal, Collectors.counting()));
 
+        long amountOfAnimal = objectCounts.entrySet().stream()
+                .filter(entry -> organism.getClass().equals(entry.getKey().getClass()))
+                .mapToLong(Map.Entry::getValue)
+                .sum();
 
-        return "Location{}";
+        return organism.getMaxCountOnCell() > amountOfAnimal;
+    }
 
+    public void addAnimal(BasalOrganism organism) {
+        if (isEnoughSpace(organism)) animals.add(organism);
+    }
 
+    public void removeAnimal(BasalOrganism organism) {
+        animals.remove(organism);
+    }
+
+    public BasalOrganism getAnimal(BasalOrganism organism) {
+        Optional<BasalOrganism> foundOrganism = animals.stream()
+                .filter(animal -> animal.equals(organism))
+                .findFirst();
+
+        return foundOrganism.orElse(null);
+    }
+
+    public BasalOrganism getPair(BasalOrganism organism) {
+        Optional<BasalOrganism> foundOrganism = animals.stream()
+                .filter(animal -> !animal.equals(organism) && animal.getClass().equals(organism.getClass()))
+                .findFirst();
+
+        return foundOrganism.orElse(null);
     }
 }

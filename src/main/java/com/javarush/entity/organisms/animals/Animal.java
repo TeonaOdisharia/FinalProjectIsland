@@ -14,7 +14,7 @@ import java.util.Map;
 @NoArgsConstructor
 @ToString
 public abstract class Animal extends BasalOrganism {
-    private int energy;
+    private int energy = 1;
     private double foodForLife;
     private Map<String, Integer> eatingMap;
 

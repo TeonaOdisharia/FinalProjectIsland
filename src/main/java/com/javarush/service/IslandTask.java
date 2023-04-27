@@ -1,6 +1,7 @@
 package com.javarush.service;
 
 import com.javarush.entity.islandModel.Location;
+import com.javarush.exceptions.IslandException;
 import com.javarush.generators.IslandGenerator;
 import com.javarush.settings.Settings;
 
@@ -24,18 +25,19 @@ public class IslandTask {
             startingTheSimulation(locations);
 
             if (simulationStepNumber.get() >= numberOfSimulationSteps) {
-                service.shutdown();
+                service.shutdown();//end
                 for (int i = 0; i < locations.length * locations[0].length; i++) {
-                    locations[i / locations[0].length][i % locations[0].length].shutdown();
+                    Location location = locations[i / locations[0].length][i % locations[0].length];
+                    location.shutdown(); //end
                 }
                 for (int i = 0; i < locations.length * locations[0].length; i++) {
                     try {
-                        locations[i / locations[0].length][i % locations[0].length].awaitTermination(stepDuration);
+                        Location location = locations[i / locations[0].length][i % locations[0].length];
+                        location.awaitTermination(stepDuration); //await
                     } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
+                        throw new IslandException(e);
                     }
                 }
-                island.getIslandMap().showIsland();
             }
         }
     };
@@ -46,9 +48,10 @@ public class IslandTask {
 
     private void startingTheSimulation( Location[][] locations) {
         simulationStepNumber.incrementAndGet();
-        island.getIslandMap().showIsland();
+        island.getIslandMap().showStatisticsOfIsland(simulationStepNumber.get());
         for (int i = 0; i < locations.length * locations[0].length; i++) {
-            locations[i / locations[0].length][i % locations[0].length].start();
+            Location location = locations[i / locations[0].length][i % locations[0].length];
+            location.start(); //start
         }
     }
 
